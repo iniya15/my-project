@@ -6,6 +6,17 @@ import subprocess
 app = Flask(__name__)
 CORS(app)
 
+# ✅ Homepage route for testing Render
+@app.route("/")
+def index():
+    return "✅ Flask backend is live!"
+
+# ✅ Test route
+@app.route("/api/hello")
+def hello():
+    return jsonify({"message": "Hello from Flask!"})
+
+# 🎯 Existing poem database
 poems = {
     "love": [
         "Love is a whisper in the night,\nA gentle hand, a soft delight.\nIt weaves through time, both old and new,\nA fire that burns forever true.\nWith every heartbeat, love will grow,\nThrough highs and lows, it still will flow.",
@@ -57,6 +68,7 @@ poems = {
     ]
 }
 
+# 🔄 Bot Starter Route
 @app.route("/start-bot", methods=["POST"])
 def start_bot():
     try:
@@ -71,6 +83,7 @@ def start_bot():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# 📝 Poem Generator Route
 @app.route("/generate", methods=["POST"])
 def generate_poem():
     data = request.get_json()
@@ -85,5 +98,6 @@ def generate_poem():
 
     return jsonify({"poem": final_poems})
 
+# ✅ Run app
 if __name__ == "__main__":
     app.run(debug=True)
