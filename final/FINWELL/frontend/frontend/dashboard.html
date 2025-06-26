@@ -1,0 +1,386 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FinWell</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --primary-color: #3949ab;
+            --secondary-color: #7e57c2;
+            --accent-color: #b39ddb;
+            --background-color: #ede7f6;
+            --text-color: #1a237e;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: 'Inter', sans-serif;
+            padding: 40px 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .result-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--accent-color);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary-color);
+        }
+
+        .progress {
+            height: 25px;
+            margin: 20px 0;
+            background-color: var(--accent-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transition: width 1s ease-in-out;
+        }
+
+        .suggestion-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--accent-color);
+        }
+
+        .suggestion-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary-color);
+        }
+
+        .back-arrow {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .back-arrow:hover {
+            color: var(--secondary-color);
+            transform: translateX(-5px);
+            background-color: var(--accent-color);
+        }
+
+        .quiz-results {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--accent-color);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .quiz-results:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary-color);
+        }
+
+        .risk-level {
+            padding: 20px;
+            margin-bottom: 15px;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .risk-level.low {
+            border-left: 4px solid #4CAF50;
+        }
+
+        .risk-level.medium {
+            border-left: 4px solid #FFC107;
+        }
+
+        .risk-level.high {
+            border-left: 4px solid #F44336;
+        }
+
+        .risk-level:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .alert {
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--accent-color);
+            box-shadow: var(--shadow-sm);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .result-card, .quiz-results {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-arrow">&larr; Back</a>
+        <h1>Your Dashboard</h1>
+
+        <div id="retirementResults">
+            <!-- Quiz Results Section -->
+            <div id="quizResults" class="quiz-results">
+                <h3>Your Risk Tolerance Profile</h3>
+                <div id="riskProfile"></div>
+            </div>
+
+            <!-- Retirement Results Section -->
+            <div class="result-card">
+                <h3>Your Retirement Readiness Score</h3>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                </div>
+                <div id="scoreDetails"></div>
+            </div>
+
+            <div class="result-card">
+                <h3>Financial Projections</h3>
+                <div id="projections"></div>
+            </div>
+
+            <div class="result-card">
+                <h3>Personalized Suggestions</h3>
+                <div id="suggestions"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function indian_numbering_format(number) {
+            if (number >= 1_00_00_000) {
+                return `Rs ${(number / 1_00_00_000).toFixed(2)} Crore`;
+            } else if (number >= 1_00_000) {
+                return `Rs ${(number / 1_00_000).toFixed(2)} Lakh`;
+            } else if (number >= 1_000) {
+                return `Rs ${(number / 1_000).toFixed(2)} Thousand`;
+            } else {
+                return `Rs ${number.toFixed(2)}`;
+            }
+        }
+
+        function getRiskLevelDescription(level) {
+            const descriptions = {
+                low: {
+                    title: "Conservative Investor",
+                    description: "You prefer safety over high returns. Your investments are likely in low-risk options like fixed deposits and government bonds.",
+                    suggestions: [
+                        "Consider gradually increasing your risk exposure to potentially higher returns",
+                        "Focus on long-term investments to combat inflation",
+                        "Maintain a strong emergency fund"
+                    ]
+                },
+                medium: {
+                    title: "Balanced Investor",
+                    description: "You're comfortable with moderate risk and seek a balance between growth and safety.",
+                    suggestions: [
+                        "Maintain a diversified portfolio",
+                        "Consider a mix of equity and debt instruments",
+                        "Regularly review and rebalance your portfolio"
+                    ]
+                },
+                high: {
+                    title: "Aggressive Investor",
+                    description: "You're comfortable with high risk and seek maximum returns over the long term.",
+                    suggestions: [
+                        "Ensure you have a solid emergency fund",
+                        "Consider diversifying across different sectors",
+                        "Regularly monitor market conditions"
+                    ]
+                }
+            };
+            return descriptions[level] || descriptions.medium;
+        }
+
+        function displayResults() {
+            const formData = JSON.parse(localStorage.getItem('formData') || '{}');
+            const results = JSON.parse(localStorage.getItem('retirementResults') || '{}');
+            const quizData = JSON.parse(localStorage.getItem('quizResults') || '{}');
+
+            // Display Quiz Results
+            if (quizData.riskLevel) {
+                const riskProfile = getRiskLevelDescription(quizData.riskLevel);
+                document.getElementById('riskProfile').innerHTML = `
+                    <div class="risk-level ${quizData.riskLevel}">
+                        <h4>${riskProfile.title}</h4>
+                        <p>${riskProfile.description}</p>
+                        <h5>Suggestions:</h5>
+                        <ul>
+                            ${riskProfile.suggestions.map(suggestion => `<li>${suggestion}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            } else {
+                document.getElementById('quizResults').style.display = 'none';
+            }
+
+            if (Object.keys(formData).length === 0 || Object.keys(results).length === 0) {
+                document.getElementById('retirementResults').innerHTML = `
+                    <div class="alert alert-info">
+                        <h4>No retirement data available</h4>
+                        <p>Please use the <a href="form.html">Retirement Calculator</a> to get your personalized analysis.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Update progress bar
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.style.width = `${(results.score / 10) * 100}%`;
+            progressBar.textContent = `${results.score}/10`;
+
+            // Update score details
+            document.getElementById('scoreDetails').innerHTML = `
+                <p>Your current retirement readiness score is ${results.score}/10.</p>
+                ${results.score >= 6 ? 
+                    '<p class="text-success">You are on a good path to retirement!</p>' : 
+                    '<p class="text-warning">There is room for improvement in your retirement planning.</p>'
+                }
+            `;
+
+            // Update projections
+            document.getElementById('projections').innerHTML = `
+                <div class="suggestion-item">
+                    <h4>Projected Savings by Retirement</h4>
+                    <p>${indian_numbering_format(results.projected)}</p>
+                </div>
+                <div class="suggestion-item">
+                    <h4>Estimated Retirement Need</h4>
+                    <p>${indian_numbering_format(results.needed)}</p>
+                </div>
+            `;
+
+            // Update suggestions based on both form data and quiz results
+            let suggestionsHtml = '';
+            if (results.score < 6) {
+                suggestionsHtml = `
+                    <div class="suggestion-item">
+                        <h4>Areas for Improvement</h4>
+                        <ul>
+                            ${formData.income <= formData.expenses ? 
+                                '<li>Your expenses match or exceed your income. Try to cut expenses or increase earnings.</li>' : ''}
+                            ${(formData.income - formData.expenses) / formData.income < 0.2 ? 
+                                '<li>You are saving less than 20% of your income. Aim to increase your savings rate.</li>' : ''}
+                            ${formData.savings < 50000 && formData.age > 30 ? 
+                                '<li>Your savings are below recommended levels for your age. Boost your savings when possible.</li>' : ''}
+                            ${formData.riskTolerance.toLowerCase() === "low" && results.score < 5 ? 
+                                '<li>You chose low-risk investments. Consider medium risk to increase long-term returns, if appropriate.</li>' : ''}
+                            ${formData.retirementAge - formData.age < 10 ? 
+                                '<li>You have less than 10 years to retire. Maximize contributions and explore higher-return strategies.</li>' : ''}
+                            <li>Track your spending habits and stick to a budget.</li>
+                            <li>Set specific retirement goals (age, lifestyle, etc.) and align your plan accordingly.</li>
+                        </ul>
+                    </div>
+                `;
+            } else {
+                suggestionsHtml = `
+                    <div class="suggestion-item">
+                        <h4>You're on Track!</h4>
+                        <p>Continue monitoring your retirement plan and make adjustments as needed. Consider:</p>
+                        <ul>
+                            <li>Reviewing your investment portfolio periodically</li>
+                            <li>Exploring additional investment opportunities</li>
+                            <li>Maintaining your current savings rate</li>
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Add quiz-based suggestions if available
+            if (quizData.riskLevel) {
+                const riskProfile = getRiskLevelDescription(quizData.riskLevel);
+                suggestionsHtml += `
+                    <div class="suggestion-item">
+                        <h4>Based on Your Risk Profile</h4>
+                        <ul>
+                            ${riskProfile.suggestions.map(suggestion => `<li>${suggestion}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            document.getElementById('suggestions').innerHTML = suggestionsHtml;
+        }
+
+        // Display results when page loads
+        displayResults();
+    </script>
+</body>
+</html>

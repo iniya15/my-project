@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement Planning - FinWell</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="css/retirement.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <h1>FinWell</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../dashboard.html">Dashboard</a></li>
+                <li><a href="../financial_education.html">Financial Education</a></li>
+                <li><a href="index.html">Plan Retirement</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="retirement-container">
+            <h2 class="section-title">Retirement Planning Calculator</h2>
+            <div class="calculator-grid">
+                <div class="input-section">
+                    <form id="retirementForm">
+                        <div class="form-group">
+                            <label for="currentAge">Current Age</label>
+                            <input type="number" id="currentAge" required min="18" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="retirementAge">Desired Retirement Age</label>
+                            <input type="number" id="retirementAge" required min="18" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="currentSavings">Current Retirement Savings ($)</label>
+                            <input type="number" id="currentSavings" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="monthlyContribution">Monthly Contribution ($)</label>
+                            <input type="number" id="monthlyContribution" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="expectedReturn">Expected Annual Return (%)</label>
+                            <input type="number" id="expectedReturn" required min="0" max="20" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="inflationRate">Expected Inflation Rate (%)</label>
+                            <input type="number" id="inflationRate" required min="0" max="10" step="0.1" value="3">
+                        </div>
+                        <button type="submit" class="submit-btn">Calculate Retirement Plan</button>
+                    </form>
+                </div>
+                <div class="results-section">
+                    <div class="results-card">
+                        <h3>Retirement Projection</h3>
+                        <div class="results-content">
+                            <div class="result-item">
+                                <span class="label">Years Until Retirement:</span>
+                                <span id="yearsToRetirement" class="value">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Total Contributions:</span>
+                                <span id="totalContributions" class="value">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Projected Savings at Retirement:</span>
+                                <span id="projectedSavings" class="value">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Monthly Income in Retirement:</span>
+                                <span id="monthlyIncome" class="value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="retirementChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 FinWell. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="js/retirement.js"></script>
+</body>
+</html> 

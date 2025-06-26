@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retirement Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a href="../frontend/frontend/index.html" class="back-arrow">←</a>
+  <div class="container" id="main-container">
+    <div id="landing-page">
+      <h1>Plan Your Financial Future</h1>
+      <p>Get personalized retirement planning advice tailored to your needs</p>
+      <button id="start-planning-btn" class="primary-btn">Plan your retirement</button>
+    </div>
+
+    <div id="quiz-container" class="hidden">
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress" id="progress-indicator"></div>
+        </div>
+        <div class="step-text">Step <span id="current-step">1</span> of <span id="total-steps">7</span></div>
+      </div>
+
+      <!-- Step 1: Basic Information -->
+      <div class="step" id="step-1">
+        <h2>Basic Information</h2>
+        <div class="form-group">
+          <label for="age">Your Age</label>
+          <input type="number" id="age" min="18" max="100" placeholder="Enter your age">
+        </div>
+        <div class="form-group">
+          <label for="retirement-age">Planned Retirement Age</label>
+          <input type="number" id="retirement-age" min="40" max="100" placeholder="Enter your planned retirement age">
+        </div>
+        <div class="form-group">
+          <label for="monthly-income">Monthly Income (₹)</label>
+          <input type="number" id="monthly-income" placeholder="Enter your monthly income">
+        </div>
+        <div class="form-group">
+          <label for="monthly-expenses">Monthly Expenses (₹)</label>
+          <input type="number" id="monthly-expenses" placeholder="Enter your monthly expenses">
+        </div>
+        <div class="form-group">
+          <label for="current-savings">Current Savings (₹)</label>
+          <input type="number" id="current-savings" placeholder="Enter your current savings">
+        </div>
+        <div class="form-group">
+          <label for="risk-tolerance">Risk Tolerance</label>
+          <select id="risk-tolerance">
+            <option value="">Select your risk tolerance</option>
+            <option value="low">Low - Safety is my priority</option>
+            <option value="medium">Medium - Balanced approach</option>
+            <option value="high">High - I can tolerate volatility for growth</option>
+          </select>
+        </div>
+        <div class="navigation-buttons">
+          <button class="next-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Retirement Lifestyle -->
+      <div class="step hidden" id="step-2">
+        <h2>Retirement Lifestyle</h2>
+        <div class="form-group">
+          <label for="lifestyle">Expected Lifestyle in Retirement</label>
+          <select id="lifestyle">
+            <option value="">Select expected lifestyle</option>
+            <option value="basic">Basic - Essential needs only</option>
+            <option value="comfortable">Comfortable - Modest comfort and some luxuries</option>
+            <option value="luxurious">Luxurious - Premium lifestyle with many luxuries</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="life-expectancy">Expected Life Expectancy (years)</label>
+          <input type="number" id="life-expectancy" min="60" max="120" placeholder="Enter expected life expectancy">
+        </div>
+        <div class="form-group">
+          <label for="current-retirement-contribution">Current Monthly Retirement Contributions (₹)</label>
+          <input type="number" id="current-retirement-contribution" placeholder="Enter current monthly contribution">
+        </div>
+        <div class="navigation-buttons">
+          <button class="prev-btn">Previous</button>
+          <button class="next-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Investment Preferences -->
+      <div class="step hidden" id="step-3">
+        <h2>Investment Preferences</h2>
+        <div class="form-group">
+          <label>Preferred Investment Types (select all that apply)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="investment-mutual-funds">
+              <label for="investment-mutual-funds">Mutual Funds</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="investment-ppf">
+              <label for="investment-ppf">PPF (Public Provident Fund)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="investment-nps">
+              <label for="investment-nps">NPS (National Pension System)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="investment-fd">
+              <label for="investment-fd">Fixed Deposits</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="investment-stocks">
+              <label for="investment-stocks">Stocks</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="investment-real-estate">
+              <label for="investment-real-estate">Real Estate</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="investment-knowledge">Investment Knowledge Level</label>
+          <select id="investment-knowledge">
+            <option value="">Select knowledge level</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+        <div class="navigation-buttons">
+          <button class="prev-btn">Previous</button>
+          <button class="next-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Debt Information -->
+      <div class="step hidden" id="step-4">
+        <h2>Debt Information</h2>
+        <div class="form-group">
+          <label for="has-debt">Do you have any debts?</label>
+          <select id="has-debt">
+            <option value="">Select an option</option>
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
+        <div id="debt-details" class="hidden">
+          <div class="form-group">
+            <label for="debt-amount">Total Outstanding Debt Amount (₹)</label>
+            <input type="number" id="debt-amount" placeholder="Enter total debt amount">
+          </div>
+          <div class="form-group">
+            <label for="emi-amount">Monthly EMI Amount (₹)</label>
+            <input type="number" id="emi-amount" placeholder="Enter monthly EMI">
+          </div>
+          <div class="form-group">
+            <label for="interest-rate">Interest Rate (% per annum)</label>
+            <input type="number" id="interest-rate" step="0.01" placeholder="Enter interest rate">
+          </div>
+        </div>
+        <div class="navigation-buttons">
+          <button class="prev-btn">Previous</button>
+          <button class="next-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Insurance Information -->
+      <div class="step hidden" id="step-5">
+        <h2>Insurance Information</h2>
+        <div class="form-group">
+          <label for="has-insurance">Do you have insurance coverage?</label>
+          <select id="has-insurance">
+            <option value="">Select an option</option>
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
+        <div id="insurance-details" class="hidden">
+          <div class="form-group">
+            <label>Types of Insurance (select all that apply)</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="insurance-life">
+                <label for="insurance-life">Life Insurance</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="insurance-term">
+                <label for="insurance-term">Term Insurance</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="insurance-health">
+                <label for="insurance-health">Health Insurance</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dependents">Number of Dependents</label>
+          <input type="number" id="dependents" min="0" max="10" placeholder="Enter number of dependents">
+        </div>
+        <div class="navigation-buttons">
+          <button class="prev-btn">Previous</button>
+          <button class="next-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 6: Emergency Fund Planning -->
+      <div class="step hidden" id="step-6">
+        <h2>Emergency Fund Planning</h2>
+        <div class="form-group">
+          <label for="family-members">Number of Family Members</label>
+          <input type="number" id="family-members" min="1" max="10" placeholder="Enter number of family members">
+        </div>
+        <div class="form-group">
+          <label for="emergency-expense">Estimated Monthly Emergency Expense (₹)</label>
+          <input type="number" id="emergency-expense" placeholder="Enter estimated emergency expense">
+        </div>
+        <div class="navigation-buttons">
+          <button class="prev-btn">Previous</button>
+          <button class="next-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 7: Government Schemes -->
+      <div class="step hidden" id="step-7">
+        <h2>Government Schemes & Benefits</h2>
+        <div class="form-group">
+          <label for="state">State / Region</label>
+          <select id="state">
+            <option value="">Select your state</option>
+            <option value="andhra-pradesh">Andhra Pradesh</option>
+            <option value="delhi">Delhi</option>
+            <option value="gujarat">Gujarat</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="kerala">Kerala</option>
+            <option value="maharashtra">Maharashtra</option>
+            <option value="punjab">Punjab</option>
+            <option value="tamil-nadu">Tamil Nadu</option>
+            <option value="uttar-pradesh">Uttar Pradesh</option>
+            <option value="west-bengal">West Bengal</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="employment-type">Employment Type</label>
+          <select id="employment-type">
+            <option value="">Select employment type</option>
+            <option value="salaried">Salaried</option>
+            <option value="self-employed">Self-employed</option>
+            <option value="unemployed">Unemployed</option>
+            <option value="retired">Retired</option>
+          </select>
+        </div>
+        <div class="navigation-buttons">
+          <button class="prev-btn">Previous</button>
+          <button id="generate-plan-btn" class="primary-btn">Generate Retirement Plan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results-container" class="hidden">
+      <h2>Your Personalized Retirement Plan</h2>
+      <div class="loader" id="loading-indicator">
+        <div class="spinner"></div>
+        <p>Generating your personalized retirement plan...</p>
+      </div>
+      <div id="results-content" class="hidden">
+        <div class="results-card" id="monthly-saving-goal">
+          <h3>Monthly Saving Goal</h3>
+          <div class="card-content" id="monthly-saving-content"></div>
+        </div>
+        <div class="results-card" id="investment-recommendations">
+          <h3>Investment Recommendations</h3>
+          <div class="card-content" id="investment-content"></div>
+        </div>
+        <div class="results-card" id="insurance-suggestions">
+          <h3>Insurance Suggestions</h3>
+          <div class="card-content" id="insurance-content"></div>
+        </div>
+        <div class="results-card" id="gap-analysis">
+          <h3>Gap Analysis</h3>
+          <div class="card-content" id="gap-content"></div>
+        </div>
+        <div class="results-card" id="progress-tracker">
+          <h3>Progress Tracker</h3>
+          <div class="card-content" id="progress-content"></div>
+        </div>
+        <div class="results-card" id="spending-vs-saving">
+          <h3>Spending vs. Saving Trends</h3>
+          <div class="card-content" id="spending-content"></div>
+        </div>
+        <div class="results-card" id="emergency-fund">
+          <h3>Emergency Fund Planning</h3>
+          <div class="card-content" id="emergency-content"></div>
+        </div>
+        <div class="results-card" id="government-schemes">
+          <h3>Government Schemes & Senior Benefits</h3>
+          <div class="card-content" id="government-content"></div>
+        </div>
+        <div class="results-card" id="debt-repayment" class="hidden">
+          <h3>Debt Repayment Plan</h3>
+          <div class="card-content" id="debt-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/results.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>

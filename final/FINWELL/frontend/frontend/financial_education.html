@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Education - FinWell</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    :root {
+      --primary-color: #3949ab;
+      --secondary-color: #7e57c2;
+      --accent-color: #b39ddb;
+      --background-color: #ede7f6;
+      --text-color: #1a237e;
+      --white: #ffffff;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      background-color: var(--background-color);
+      font-family: 'Inter', sans-serif;
+      padding: 40px 0;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      color: var(--primary-color);
+      margin-bottom: 40px;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .content p {
+      color: var(--text-color);
+      font-size: 1.4rem;
+      text-align: center;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .btn-info {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      color: var(--white);
+      text-align: left;
+      width: 100%;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: var(--shadow-md);
+      height: 200px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn-info:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-info:hover::before {
+      opacity: 1;
+    }
+
+    .back-arrow {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      text-decoration: none;
+      margin-bottom: 40px;
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background-color: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .back-arrow:hover {
+      color: var(--secondary-color);
+      transform: translateX(-5px);
+      background-color: var(--accent-color);
+    }
+
+    .btn-container, .btn-container-bottom {
+      display: grid;
+      gap: 20px;
+      margin-bottom: 40px;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .btn-container {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .btn-container-bottom {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .btn-info h4 {
+      color: var(--white);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .btn-info p {
+      color: var(--white);
+      font-size: 1rem;
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    .additional-terms, .more-terms {
+      margin: 40px 0;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .terms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .term-card {
+      background-color: var(--white);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      border: 1px solid var(--accent-color);
+    }
+
+    .term-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--secondary-color);
+    }
+
+    .term-card h4 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .term-card p {
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .terms-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .term-item {
+      background-color: var(--white);
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      border: 1px solid var(--accent-color);
+    }
+
+    .term-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--secondary-color);
+    }
+
+    .term-item h4 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .term-item p {
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .resource-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .resource-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 12px 25px;
+      border: 2px solid var(--primary-color);
+      border-radius: 30px;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .resource-link:hover {
+      background-color: var(--primary-color);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .content p {
+        font-size: 1.2rem;
+      }
+
+      .btn-info {
+        height: auto;
+        padding: 20px;
+      }
+
+      .btn-info h4 {
+        font-size: 1.3rem;
+      }
+
+      .btn-info p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <a href="index.html" class="back-arrow">&larr; Back</a>
+    <h2>Finance Education</h2>
+
+    <!-- Content above the buttons -->
+    <div class="content">
+      <p><strong>Finance</strong> is the study and management of money, investments, and financial systems. It involves key activities such as:</p>
+    </div>
+
+    <!-- Buttons with new content -->
+    <div class="btn-container">
+      <div>
+        <button class="btn btn-info">
+          <h4>Saving</h4>
+          <p>Setting aside a portion of income for future use instead of spending it immediately. <br>🔹 Example: Depositing money in a savings account for emergencies or future goals.</p>
+        </button>
+      </div>
+      <div>
+        <button class="btn btn-info">
+          <h4>Borrowing</h4>
+          <p>Obtaining money from another party (usually a bank or lender) with the promise to repay it later, often with interest. <br>🔹 Example: Taking a loan to buy a home or fund education.</p>
+        </button>
+      </div>
+      <div>
+        <button class="btn btn-info">
+          <h4>Investing</h4>
+          <p>Using money to purchase assets (like stocks, bonds, or real estate) with the expectation of generating income or capital growth. <br>🔹 Example: Buying mutual funds to build wealth over time.</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- Improved placement for bottom buttons -->
+    <div class="btn-container-bottom">
+      <div>
+        <button class="btn btn-info">
+          <h4>Budgeting</h4>
+          <p>Planning how to allocate income toward expenses, savings, and debt repayment over a certain period. <br>🔹 Example: Creating a monthly plan to track spending and avoid overspending.</p>
+        </button>
+      </div>
+      <div>
+        <button class="btn btn-info">
+          <h4>Forecasting</h4>
+          <p>Predicting future financial trends, income, or expenses based on historical data and market analysis. <br>🔹 Example: Estimating future cash flows for a business or retirement needs for an individual.</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- Additional Financial Terms -->
+    <div class="additional-terms">
+      <h3 style="color: #3f51b5; text-align: center; margin: 40px 0;">Important Financial Terms</h3>
+      <div class="terms-grid">
+        <div class="term-card">
+          <h4>Retirement Planning</h4>
+          <p>Preparing financially for life after work through saving, investing, and income strategies.</p>
+        </div>
+        <div class="term-card">
+          <h4>Pension</h4>
+          <p>A steady retirement income, often provided by an employer or the government.</p>
+        </div>
+        <div class="term-card">
+          <h4>Social Security</h4>
+          <p>Government-issued retirement benefits that provide essential monthly income.</p>
+        </div>
+        <div class="term-card">
+          <h4>Annuity</h4>
+          <p>A financial product that provides regular income during retirement in exchange for a lump-sum or installment investment.</p>
+        </div>
+        <div class="term-card">
+          <h4>Withdrawal Rate</h4>
+          <p>The annual percentage of savings a retiree withdraws, helping ensure money lasts throughout retirement.</p>
+        </div>
+        <div class="term-card">
+          <h4>Savings Rate</h4>
+          <p>The portion of income regularly set aside for future needs, especially retirement.</p>
+        </div>
+        <div class="term-card">
+          <h4>Healthcare Costs</h4>
+          <p>Medical and insurance expenses during retirement, often one of the biggest financial burdens.</p>
+        </div>
+        <div class="term-card">
+          <h4>Asset Allocation</h4>
+          <p>The distribution of investments across categories (like stocks, bonds) to manage growth and risk.</p>
+        </div>
+        <div class="term-card">
+          <h4>Emergency Fund</h4>
+          <p>A reserve of cash for unexpected expenses, offering financial security during crises.</p>
+        </div>
+        <div class="term-card">
+          <h4>Fixed Income</h4>
+          <p>Stable and predictable income sources (e.g., pensions, bonds) vital for retirement budgeting.</p>
+        </div>
+        <div class="term-card">
+          <h4>Risk Tolerance</h4>
+          <p>A person's comfort level with financial risk, guiding how conservative or aggressive their investment strategy should be.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- More Financial Terms -->
+    <div class="more-terms">
+      <h3 style="color: #3f51b5; text-align: center; margin: 40px 0;">More Essential Financial Concepts</h3>
+      <div class="terms-list">
+        <div class="term-item">
+          <h4>💡 Inflation</h4>
+          <p>The rate at which the general level of prices for goods and services rises over time, reducing the purchasing power of money.</p>
+        </div>
+        <div class="term-item">
+          <h4>💡 Estate Planning</h4>
+          <p>The process of arranging the management and distribution of a person's assets after death, often through wills, trusts, and legal tools.</p>
+        </div>
+        <div class="term-item">
+          <h4>💡 Net Worth</h4>
+          <p>The total value of all your assets minus all your liabilities (debts).</p>
+          <p><em>Formula: Net Worth = Assets - Liabilities</em></p>
+        </div>
+        <div class="term-item">
+          <h4>💡 Long-Term Care Insurance</h4>
+          <p>Insurance that covers the cost of care for chronic illnesses, disabilities, or conditions like Alzheimer's, typically in later stages of life.</p>
+        </div>
+        <div class="term-item">
+          <h4>💡 Tax-Deferred Account</h4>
+          <p>An investment account where taxes on earnings are postponed until withdrawals begin, such as a traditional IRA or 401(k).</p>
+        </div>
+        <div class="term-item">
+          <h4>💡 Diversification</h4>
+          <p>A strategy of spreading investments across different types of assets to reduce overall risk.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resources Section -->
+    <div class="resources-section">
+      <h2 style="color: #3f51b5; text-align: center; margin: 60px 0 30px; font-size: 2.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Want to know more?</h2>
+      <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px;">Explore these valuable resources to enhance your financial knowledge:</p>
+      <div class="resource-links">
+        <a href="https://www.investopedia.com/guide-to-financial-literacy-4800530" target="_blank" class="resource-link">Investopedia Financial Literacy Guide</a>
+        <a href="https://www.investopedia.com/terms/f/financial-literacy.asp" target="_blank" class="resource-link">Financial Literacy Definition</a>
+        <a href="https://corporatefinanceinstitute.com/resources/wealth-management/financial-literacy/" target="_blank" class="resource-link">Corporate Finance Institute</a>
+        <a href="https://www.mygreatlearning.com/blog/financial-management-introduction-guide/" target="_blank" class="resource-link">Financial Management Guide</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
